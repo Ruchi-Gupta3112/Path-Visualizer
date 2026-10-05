@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b2b">
+  <title>Pathfinder Lab — Visualize the shortest route</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Pathfinder Lab home"><span class="brand-icon" aria-hidden="true">⌁</span><span>PATHFINDER<span class="brand-light">LAB</span></span></a>
+      <span class="topbar-note">Explore the logic of the shortest path</span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div><p class="eyebrow">INTERACTIVE ALGORITHM VISUALIZER</p><h1 id="page-title">Every path starts <em>somewhere.</em></h1><p class="hero-copy">Build a world, draw the obstacles, and watch an algorithm find its way through.</p></div>
+        <div class="hero-symbol" aria-hidden="true"><span>◌</span><i></i><span>✦</span></div>
+      </section>
+
+      <div class="workspace">
+        <aside class="panel controls" aria-label="Visualizer controls">
+          <div class="panel-heading"><p class="eyebrow">CONTROL CENTER</p><h2>Set the scene</h2></div>
+          <label class="field-label" for="algorithm">Algorithm</label>
+          <select id="algorithm"><option value="astar">A* Search</option><option value="dijkstra">Dijkstra's Algorithm</option></select>
+          <p id="algorithm-description" class="field-help">Uses a distance estimate to explore toward the goal.</p>
+
+          <div class="divider"></div>
+          <span class="field-label">Drawing tool</span>
+          <div class="tool-grid" role="group" aria-label="Drawing tool">
+            <button class="tool active" type="button" data-tool="wall" aria-pressed="true"><span class="tool-glyph wall-glyph" aria-hidden="true"></span>Wall</button>
+            <button class="tool" type="button" data-tool="erase" aria-pressed="false"><span class="tool-glyph erase-glyph" aria-hidden="true">⌫</span>Erase</button>
+            <button class="tool" type="button" data-tool="start" aria-pressed="false"><span class="tool-glyph start-glyph" aria-hidden="true"></span>Start</button>
+            <button class="tool" type="button" data-tool="goal" aria-pressed="false"><span class="tool-glyph goal-glyph" aria-hidden="true"></span>Goal</button>
+          </div>
+          <p class="field-help">Click or drag across the grid to edit. Choose Start or Goal, then click a new square to move it.</p>
+
+          <div class="divider"></div>
+          <div class="range-heading"><label class="field-label" for="speed">Animation speed</label><output id="speed-label" for="speed">Medium</output></div>
+          <input id="speed" type="range" min="1" max="100" value="60">
+          <div class="range-ends"><span>Slow</span><span>Fast</span></div>
+          <button id="visualize" class="primary-button" type="button"><span aria-hidden="true">▶</span> Visualize path</button>
+          <button id="stop" class="secondary-button" type="button" disabled>Stop animation</button>
+        </aside>
+
+        <section class="panel canvas-panel" aria-label="Pathfinding grid">
+          <div class="canvas-heading"><div><p class="eyebrow">THE PLAYGROUND</p><h2>Make your way</h2></div><span class="grid-pill" id="grid-size-label">28 × 16 grid</span></div>
+          <div class="legend" aria-label="Grid legend"><span><i class="legend-dot start-dot"></i>Start</span><span><i class="legend-dot goal-dot"></i>Goal</span><span><i class="legend-dot wall-dot"></i>Wall</span><span><i class="legend-dot explored-dot"></i>Explored</span><span><i class="legend-dot path-dot"></i>Shortest path</span></div>
+          <div class="grid-scroll"><div id="grid" class="grid" role="grid" aria-label="Pathfinding grid"></div></div>
+          <p id="status" class="status" role="status" aria-live="polite">Draw some walls, then visualize the path.</p>
+          <div class="stats" aria-label="Search results"><div><span class="stat-label">NODES EXPLORED</span><strong id="visited-count">—</strong></div><div><span class="stat-label">PATH LENGTH</span><strong id="path-length">—</strong></div><div><span class="stat-label">ALGORITHM</span><strong id="algorithm-name">A*</strong></div></div>
+        </section>
+      </div>
+
+      <section class="bottom-panel" aria-label="Grid setup">
+        <div><p class="eyebrow">BUILD YOUR WORLD</p><h2>Shape the grid</h2><p>Resize it, add obstacles, or clear the way and start over.</p></div>
+        <div class="grid-setup"><label>Rows <input id="rows" type="number" min="8" max="24" value="16"></label><label>Columns <input id="cols" type="number" min="8" max="40" value="28"></label><button id="create-grid" class="small-button" type="button">Create grid</button></div>
+        <div class="utility-actions"><button id="random-walls" type="button">✦ Random walls</button><button id="clear-path" type="button">↻ Clear path</button><button id="clear-grid" type="button">⌫ Clear walls</button></div>
+      </section>
+      <footer>Built for the curious. Find the route, understand the search.</footer>
+    </main>
+  </div>
+  <noscript><div class="noscript">JavaScript is required to draw and visualize paths. Open this file in a browser with JavaScript enabled.</div></noscript>
+  <script src="algorithms.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
