@@ -1,4 +1,4 @@
-# Pathfinder Lab
+# Path Visualizer
 
 An interactive pathfinding visualizer built with HTML, CSS, and JavaScript.
 
